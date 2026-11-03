@@ -37,6 +37,12 @@ def generate_launch_description():
         description='Full path to the ROS2 camera parameters file to use for fast_livo2 nodes',
     )
 
+    rviz_cfg_arg = DeclareLaunchArgument(
+        'rviz_cfg',
+        default_value=rviz_config_file,
+        description='Full path to the rviz config file',
+    )
+
     params_file = LaunchConfiguration('params_file')
     cam_params_file = LaunchConfiguration('cam_params_file')
 
@@ -44,6 +50,7 @@ def generate_launch_description():
         use_rviz_arg,
         config_arg,
         cam_config_arg,
+        rviz_cfg_arg,
 
         Node(
             package="fast_livo",
@@ -62,7 +69,7 @@ def generate_launch_description():
             package="rviz2",
             executable="rviz2",
             name="rviz2",
-            arguments=["-d", rviz_config_file],
+            arguments=["-d", LaunchConfiguration("rviz_cfg")],
             output="screen"
         ),
     ])
