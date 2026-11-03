@@ -307,14 +307,15 @@ void LIVMapper::initializeFiles() {
       }
     }
   }
-  if (colmap_output_en)
-    fout_points.open(std::string(ROOT_DIR) + "Log/Colmap/sparse/0/points3D.txt",
-                     std::ios::out);
-  if (pcd_save_interval > 0)
-    fout_pcd_pos.open(std::string(ROOT_DIR) + "Log/PCD/scans_pos.json",
-                      std::ios::out);
-  fout_pre.open(DEBUG_FILE_DIR("mat_pre.txt"), std::ios::out);
-  fout_out.open(DEBUG_FILE_DIR("mat_out.txt"), std::ios::out);
+  // if (colmap_output_en)
+  //   fout_points.open(std::string(ROOT_DIR) +
+  //   "Log/Colmap/sparse/0/points3D.txt",
+  //                    std::ios::out);
+  // if (pcd_save_interval > 0)
+  //   fout_pcd_pos.open(std::string(ROOT_DIR) + "Log/PCD/scans_pos.json",
+  //                     std::ios::out);
+  // fout_pre.open(DEBUG_FILE_DIR("mat_pre.txt"), std::ios::out);
+  // fout_out.open(DEBUG_FILE_DIR("mat_out.txt"), std::ios::out);
 }
 
 void LIVMapper::initializeSubscribersAndPublishers(
@@ -598,18 +599,18 @@ void LIVMapper::handleLIO() {
     static bool pos_opend = false;
     static int ocount = 0;
     std::ofstream outFile, evoFile;
-    if (!pos_opend) {
-      evoFile.open(std::string(ROOT_DIR) + "Log/result/" + seq_name + ".txt",
-                   std::ios::out);
-      pos_opend = true;
-      if (!evoFile.is_open())
-        RCLCPP_ERROR(this->node->get_logger(), "open fail\n");
-    } else {
-      evoFile.open(std::string(ROOT_DIR) + "Log/result/" + seq_name + ".txt",
-                   std::ios::app);
-      if (!evoFile.is_open())
-        RCLCPP_ERROR(this->node->get_logger(), "open fail\n");
-    }
+    // if (!pos_opend) {
+    //   evoFile.open(std::string(ROOT_DIR) + "Log/result/" + seq_name + ".txt",
+    //                std::ios::out);
+    //   pos_opend = true;
+    //   if (!evoFile.is_open())
+    //     RCLCPP_ERROR(this->node->get_logger(), "open fail\n");
+    // } else {
+    //   evoFile.open(std::string(ROOT_DIR) + "Log/result/" + seq_name + ".txt",
+    //                std::ios::app);
+    //   if (!evoFile.is_open())
+    //     RCLCPP_ERROR(this->node->get_logger(), "open fail\n");
+    // }
     Eigen::Matrix4d outT;
     Eigen::Quaterniond q(_state.rot_end);
     evoFile << std::fixed;
